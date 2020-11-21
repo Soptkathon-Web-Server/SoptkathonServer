@@ -11,4 +11,7 @@ if (config.use_env_variable) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
+db.MultiAnswer = require('./multiAnswer')(sequelize, Sequelize);
+db.ShortAnswer = require('./shortAnswer')(sequelize, Sequelize);
+db.ShortQuestion = require('./shortQuestion')(sequelize, Sequelize);
 module.exports = db;

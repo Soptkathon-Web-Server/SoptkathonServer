@@ -26,7 +26,6 @@ const authUtil = {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.INVALID_TOKEN));
         }
         req.decoded = user;
-        console.log('아 뭐임');
         next();
     }
 }
