@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('short-answer', {
+    return sequelize.define('short_answer', {
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,

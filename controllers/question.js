@@ -4,11 +4,14 @@ const RES_MSSAGE = require('../modules/responseMessage');
 const jwt = require('../modules/jwt');
 const crypto = require('crypto');
 const { MultiAnswer } = require('../models');
+const { ShortQuestion } = require('../models');
+const {Op} = require('sequelize')
+
 
 module.exports = {
     write: async (req, res) => {
         try {
-            console.log('\n\n\n\n\n\n')
+            console.log('\n\n\n\n\n\n');
             const user = req.decoded;
             const {page, answer} = req.body;
             var question = {};
@@ -26,6 +29,7 @@ module.exports = {
                 changeRow = await MultiAnswer.update(question, {where: {user_id: user.id}});
             else {
                 question['user_id'] = user.id;
+                question['id'] = result.id + 1;
                 changeRow = await MultiAnswer.create(question);
             }
             if (changeRow > 0)
@@ -37,6 +41,25 @@ module.exports = {
             console.log('get rand token error : ', error)
             res.status(CODE.SERVICE_UNAVAILABLE).send(util.fail(CODE.SERVICE_UNAVAILABLE));
         }
+    },
+    getShortQuestion: async (req, res) => {
+        try {
+            const max = 25;
+            const min = 1;
+            const randNum = [];
+            var num;
+        while (randNum.length !== 5) {
+            num = Math.floor(Math.random()*(max-min+1)) + min;
+            if (!randNum.includes(num))
+                randNum.push(num);
+        }
+
+        const result = await ShortQuestion.findAll({where: {id: {[Op.in]: randNum}}})
+        res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_ISSUE_TOKEN, {result}));
+    } catch (error) {
+        console.log('getShortQuestion error : ', error)
+            res.status(CODE.SERVICE_UNAVAILABLE).send(util.fail(CODE.SERVICE_UNAVAILABLE));
+    }
     }
 }
 

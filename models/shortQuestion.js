@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('short-answer', {
+    return sequelize.define('short_question', {
         question: {
             type: DataTypes.TEXT(),
             allowNull: true,
