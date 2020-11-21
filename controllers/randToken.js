@@ -4,11 +4,16 @@ const RES_MSSAGE = require('../modules/responseMessage');
 const encrypt = require('../modules/encrypt');
 const jwt = require('../modules/jwt');
 const crypto = require('crypto');
+const { User } = require('../models');
 
 module.exports = {
     getRandToken: async (req, res) => {
+        const token = await crypto.randomBytes(4)
+        await User.create({
+            nickname: token
+        });
         
-        const dd = await crypto.randomBytes(4)
-        console.log(dd.toString('hex'));
+        res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_ISSUE_TOKEN));
     }
 }
+
