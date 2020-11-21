@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(150),
             allowNull: true,
         },
+        stone_image: {
+            type: DataTypes.STRING(200),
+            allowNull: true,
+        },
     }, {
         freezeTableName: true,
         timestamps: false,
