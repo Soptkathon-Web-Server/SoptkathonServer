@@ -8,10 +8,12 @@ if (config.use_env_variable) {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 db.User = require('./user')(sequelize, Sequelize);
 db.MultiAnswer = require('./multiAnswer')(sequelize, Sequelize);
 db.ShortAnswer = require('./shortAnswer')(sequelize, Sequelize);
 db.ShortQuestion = require('./shortQuestion')(sequelize, Sequelize);
+
 module.exports = db;
