@@ -13,7 +13,7 @@ module.exports = {
             nickname: token
         });
         
-        res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_ISSUE_TOKEN));
+        res.status(CODE.OK).send(util.success(CODE.OK, RES_MESSAGE.SUCCESS_ISSUE_TOKEN));
     }
 }
 
