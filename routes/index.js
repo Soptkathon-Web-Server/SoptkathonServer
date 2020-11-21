@@ -8,5 +8,6 @@ router.get('/', function(req, res, next) {
 router.use('/api/auth', require('./auth'));
 router.use('/api/question', require('./question'));
 router.use('/api/users', require('./users'));
+router.use('/api/stones', require('./stone'));
 
 module.exports = router;
