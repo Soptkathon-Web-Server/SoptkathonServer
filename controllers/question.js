@@ -11,7 +11,6 @@ const {Op} = require('sequelize')
 module.exports = {
     write: async (req, res) => {
         try {
-            console.log('\n\n\n\n\n\n');
             const user = req.decoded;
             const {page, answer} = req.body;
             var question = {};
@@ -23,22 +22,19 @@ module.exports = {
             question[page] = answer;
             
             var result = await MultiAnswer.findOne({where: {user_id: user.id}});
-            console.log('result : ', result);
             var changeRow = 0
+
             if (result)
                 changeRow = await MultiAnswer.update(question, {where: {user_id: user.id}});
             else {
                 question['user_id'] = user.id;
-                question['id'] = result.id + 1;
                 changeRow = await MultiAnswer.create(question);
             }
             if (changeRow > 0)
                 res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_ISSUE_TOKEN));
             else
                 res.status(CODE.OK).send(util.success(CODE.BAD_REQUEST, RES_MSSAGE.NO_CHANGE_ROW));
-
         } catch (error) {
-            console.log('get rand token error : ', error)
             res.status(CODE.SERVICE_UNAVAILABLE).send(util.fail(CODE.SERVICE_UNAVAILABLE));
         }
     },
