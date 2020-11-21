@@ -20,6 +20,7 @@ module.exports = {
     checkRandToken: (req, res) => {
         const user = req.decoded;
         res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_ISSUE_TOKEN, {id: user.id, nickname: user.nickname}));
+
     }
 }
 
