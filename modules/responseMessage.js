@@ -11,8 +11,10 @@ module.exports = {
     INVALID_TOKEN: '유효하지 않은 토큰값입니다.',
     AUTH_SUCCESS: '인증에 성공했습니다.',
     ISSUE_SUCCESS: '새로운 토큰이 생성되었습니다.',
+    NO_USER: '존재하지 않는 사용자입니다.',
 
 
-    SUCCESS_SAVE_ANSWER: '새로운 토큰이 생성되었습니다.',
+    SUCCESS_SAVE_ANSWER: '저장에 성공했습니다.',
+    NO_CHANGE_ROW: '변경된 사항이 없습니다.',
 
 }

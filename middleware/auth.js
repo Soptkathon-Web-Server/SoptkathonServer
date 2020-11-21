@@ -2,6 +2,7 @@ const jwt = require('../modules/jwt');
 const MSG = require('../modules/responseMessage');
 const CODE = require('../modules/statusCode');
 const util = require('../modules/util');
+const { User } = require('../models/index');
 const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
 
@@ -15,7 +16,7 @@ const authUtil = {
         if (!token) {
             return res.json(util.fail(CODE.BAD_REQUEST, MSG.EMPTY_TOKEN));
         }
-        const user = await jwt.verify(token);
+        var user = await jwt.verify(token);
         if (user === TOKEN_EXPIRED) {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.EXPIRED_TOKEN));
         }
@@ -26,6 +27,9 @@ const authUtil = {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.INVALID_TOKEN));
         }
         req.decoded = user;
+        user = await User.findOne({where:{id: user.id}});
+        if (!user) 
+            return res.json(util.fail(CODE.UNAUTHORIZED, MSG.NO_USER));
         next();
     }
 }
