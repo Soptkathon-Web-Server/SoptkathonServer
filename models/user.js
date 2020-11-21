@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('User', {
+    return sequelize.define('users', {
         //모델의 Attributes (Column)을 정의하는곳
         nickname: {
             type: DataTypes.STRING(45),
