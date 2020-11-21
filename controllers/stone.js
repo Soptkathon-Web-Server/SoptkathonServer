@@ -21,4 +21,5 @@ module.exports = {
 
 function getParam (req, res) {
     res.status(CODE.OK).send(util.success(CODE.OK, RES_MSSAGE.SUCCESS_SAVE_ANSWER, '이건 getParam'));
+    
 }
