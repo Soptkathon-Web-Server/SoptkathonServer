@@ -1,6 +1,11 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('multi-answer', {
-        //모델의 Attributes (Column)을 정의하는곳
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            allowNull: false
+        },
         user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
