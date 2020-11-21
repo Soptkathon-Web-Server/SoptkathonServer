@@ -1,4 +1,4 @@
-const jwt = require('./auth');
+const jwt = require('../modules/jwt');
 const MSG = require('../modules/responseMessage');
 const CODE = require('../modules/statusCode');
 const util = require('../modules/util');
@@ -15,17 +15,18 @@ const authUtil = {
         if (!token) {
             return res.json(util.fail(CODE.BAD_REQUEST, MSG.EMPTY_TOKEN));
         }
-        const user = jwt.verify(token);
+        const user = await jwt.verify(token);
         if (user === TOKEN_EXPIRED) {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.EXPIRED_TOKEN));
         }
         if (user === TOKEN_INVALID) {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.INVALID_TOKEN));
         }
-        if (user.idx === undefined) {
+        if (user.id === undefined) {
             return res.json(util.fail(CODE.UNAUTHORIZED, MSG.INVALID_TOKEN));
         }
         req.decoded = user;
+        console.log('아 뭐임');
         next();
     }
 }
