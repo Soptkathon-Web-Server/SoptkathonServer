@@ -21,4 +21,6 @@ module.exports = {
     SUCCESS_SAVE_ANSWER: '저장에 성공했습니다.',
     NO_CHANGE_ROW: '변경된 사항이 없습니다.',
 
+    SUCCESS_READ_STONE: '질문 조회에 성공했습니다.'
+
 }

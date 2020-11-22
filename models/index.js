@@ -16,4 +16,15 @@ db.MultiAnswer = require('./multiAnswer')(sequelize, Sequelize);
 db.ShortAnswer = require('./shortAnswer')(sequelize, Sequelize);
 db.ShortQuestion = require('./shortQuestion')(sequelize, Sequelize);
 
+db.User.belongsToMany(db.ShortQuestion, {
+  through: 'short_answer',
+  foreignKey: 'user_id',
+  otherKey: 'question_id'
+});
+db.ShortQuestion.belongsToMany(db.User, {
+  through: 'short_answer',
+  foreignKey: 'user_id',
+  otherKey: 'question_id'
+});
+
 module.exports = db;
